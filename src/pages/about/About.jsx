@@ -176,10 +176,7 @@ const About = () => {
           <div className="carouselCC container p-[5rem] m-auto">
             <div className="">
               <div>
-                <h4
-                  className="font-bold md:text-3xl text-3xl text-center pt-8 pb-8"
-                  
-                >
+                <h4 className="font-bold md:text-3xl text-3xl text-center pt-8 pb-8">
                   Our Brilliant Students
                 </h4>
               </div>
@@ -209,23 +206,23 @@ const About = () => {
                     </blockquote>
                     <div className="text-center dark:text-gray-400">
                       <p>Sujay</p>
-                      <p>Marks:  CCC 100/86</p>
+                      <p>Marks: CCC 100/86</p>
                     </div>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                <div className="flex flex-col justify-center items-center py-5">
+                  <div className="flex flex-col justify-center items-center py-5">
                     <img
                       src={Mohan}
                       alt=""
                       className="w-20 h-20 rounded-full dark:bg-gray-500 rounded-circle"
                     />
                     <blockquote className="max-w-lg text-lg italic font-medium text-center">
-                    "Topper of the CCC Exam August 2023"
+                      "Topper of the CCC Exam August 2023"
                     </blockquote>
                     <div className="text-center dark:text-gray-400">
-                    <p>Mohan</p>
-                      <p>Marks:  ADCA 100/88</p>
+                      <p>Mohan</p>
+                      <p>Marks: ADCA 100/88</p>
                     </div>
                   </div>
                 </SwiperSlide>
