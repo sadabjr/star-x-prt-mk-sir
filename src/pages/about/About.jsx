@@ -178,7 +178,7 @@ const About = () => {
               <div>
                 <h4
                   className="font-bold md:text-3xl text-3xl text-center pt-8 pb-8"
-                  style={{ textDecoration: "underline" }}
+                  
                 >
                   Our brilliant Students
                 </h4>
