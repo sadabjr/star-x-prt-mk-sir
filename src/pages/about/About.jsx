@@ -180,7 +180,7 @@ const About = () => {
                   className="font-bold md:text-3xl text-3xl text-center pt-8 pb-8"
                   
                 >
-                  Our brilliant Students
+                  Our Brilliant Students
                 </h4>
               </div>
               <Swiper
