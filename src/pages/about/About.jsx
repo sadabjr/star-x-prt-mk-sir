@@ -6,6 +6,17 @@ import about2 from "../../asssets/images/about2.jpg";
 import rahul from "../../asssets/images/rahul.jpg";
 import ranjeet from "../../asssets/images/Ranjeet.jpg";
 import deepak from "../../asssets/images/deepak.jpg";
+import Sujay from "../../asssets/images/Sujay.jpg";
+import Mohan from "../../asssets/images/mohan.jpg";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+// import required modules
+
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 const About = () => {
   return (
@@ -120,7 +131,6 @@ const About = () => {
           <h1 className="text-center text-[2rem] font-bold">Our Team</h1>
           <div class="flex flex-wrap justify-center align-middle gap-5 py-5 ">
             {/* card */}
-           
 
             <div className="relative max-w-md  rounded overflow-hidden shadow-lg">
               <img
@@ -160,6 +170,69 @@ const About = () => {
           </div>
 
           {/* carsual */}
+
+          {/* testimonials */}
+
+          <div className="carouselCC container p-[5rem] m-auto">
+            <div className="">
+              <div>
+                <h4
+                  className="font-bold md:text-3xl text-3xl text-center pt-8 pb-8"
+                  style={{ textDecoration: "underline" }}
+                >
+                  Our brilliant Students
+                </h4>
+              </div>
+              <Swiper
+                spaceBetween={30}
+                centeredSlides={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={true}
+                modules={[Autoplay, Pagination, Navigation]}
+                className="mySwiper"
+              >
+                <SwiperSlide>
+                  <div className="flex flex-col justify-center items-center py-5">
+                    <img
+                      src={Sujay}
+                      alt=""
+                      className="w-20 h-20 rounded-full dark:bg-gray-500 rounded-circle"
+                    />
+                    <blockquote className="max-w-lg text-lg italic font-medium text-center">
+                      "Topper of the CCC Exam August 2023"
+                    </blockquote>
+                    <div className="text-center dark:text-gray-400">
+                      <p>Sujay</p>
+                      <p>Marks:  CCC 100/86</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                <div className="flex flex-col justify-center items-center py-5">
+                    <img
+                      src={Mohan}
+                      alt=""
+                      className="w-20 h-20 rounded-full dark:bg-gray-500 rounded-circle"
+                    />
+                    <blockquote className="max-w-lg text-lg italic font-medium text-center">
+                    "Topper of the CCC Exam August 2023"
+                    </blockquote>
+                    <div className="text-center dark:text-gray-400">
+                    <p>Mohan</p>
+                      <p>Marks:  ADCA 100/88</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide></SwiperSlide>
+              </Swiper>
+            </div>
+          </div>
         </div>
       </div>
     </div>

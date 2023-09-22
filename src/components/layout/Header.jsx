@@ -75,11 +75,13 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className=" w-screen overflow-hidden ">
-      <div className="top-0 right-full whitespace-nowrap animate-movetext  ">
-        <h3 className="text-[1.5rem]">Hardware Training is 30% free on every course</h3>
-      </div>
-    </div>
+      {/* <div className=" w-screen overflow-hidden ">
+        <div className="top-0 right-full whitespace-nowrap animate-movetext  ">
+          <h3 className="text-[1.5rem]">
+            Hardware Training is 30% free on every course
+          </h3>
+        </div>
+      </div> */}
     </>
   );
 };
