@@ -6,7 +6,7 @@ const CoursePage = () => {
 
   return (
     <div>
-      <div className="container my-19 mx-auto md:px-6 min-h-screen">
+      <div className="my-19 mx-auto md:px-6 min-h-screen">
         <section className="mb-32">
           <div className="flex justify-center m-2 rounded-lg drop-shadow-xl p-5 bg-white">
             <div className="max-w-[700px] text-center py-5">

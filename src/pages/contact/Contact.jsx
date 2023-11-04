@@ -43,7 +43,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen ">
       <div className="banner">
-        <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
+        <div className="mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
           {/* Rest of the banner content */}
           <h1 className="font-bold md:text-4xl text-2xl pt-40 pb-24">
             <span className="text-white p-0 m-0 text-[3rem]">Get In Touch</span>{" "}

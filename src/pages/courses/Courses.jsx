@@ -5,7 +5,7 @@ import CourseCard from "../../components/CourseCard";
 const Courses = () => {
   return (
     <div className="min-h-screen z-0">
-      <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
+      <div className=" mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
         <h4
           className="font-bold md:text-3xl text-3xl text-center pt-10"
           style={{ textDecoration: "underline" }}

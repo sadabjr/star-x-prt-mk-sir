@@ -1,7 +1,17 @@
-import "./header.css";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../asssets/images/logo.png";
+
+
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate(); // Set this to true when the user is logged in.
+
+  const handleLogout = () => {
+    setIsLoggedIn(true);
+    navigate("/");
+   };
+
   return (
     <>
       <div className="navbar bg-base-100 border-b shadow-sm">
@@ -33,6 +43,13 @@ const Header = () => {
             </li>
             <li>
               <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              {isLoggedIn ? (
+                <button onClick={handleLogout}>Log Out</button>
+              ) : (
+                <Link to="/login">Login</Link>
+              )}
             </li>
           </ul>
           <div className="dropdown dropdown-end hidden">
@@ -75,13 +92,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {/* <div className=" w-screen overflow-hidden ">
-        <div className="top-0 right-full whitespace-nowrap animate-movetext  ">
-          <h3 className="text-[1.5rem]">
-            Hardware Training is 30% free on every course
-          </h3>
-        </div>
-      </div> */}
     </>
   );
 };

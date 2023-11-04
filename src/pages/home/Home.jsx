@@ -7,14 +7,9 @@ import whatsapp from "../../asssets/images/whatsapp.png";
 import facebook from "../../asssets/images/facebook.png";
 import instagram from "../../asssets/images/instagram.png";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
-// import required modules
-
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { RxDotFilled } from "react-icons/rx";
 
 import img1 from "../../asssets/images/4.jpg";
 import img2 from "../../asssets/images/7.jpg";
@@ -28,8 +23,66 @@ import img9 from "../../asssets/images/9.jpg";
 import img10 from "../../asssets/images/7-compressed.jpg";
 import img11 from "../../asssets/images/8-compressed.jpg";
 import img12 from "../../asssets/images/9-compressed.jpg";
+import { useState } from "react";
 
 const Home = () => {
+  const slides = [
+    {
+      url: img1,
+    },
+    {
+      url: img2,
+    },
+    {
+      url: img3,
+    },
+
+    {
+      url: img4,
+    },
+    {
+      url: img5,
+    },
+    {
+      url: img6,
+    },
+    {
+      url: img7,
+    },
+    {
+      url: img8,
+    },
+    {
+      url: img9,
+    },
+    {
+      url: img10,
+    },
+    {
+      url: img11,
+    },
+    {
+      url: img12,
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === slides.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const goToSlide = (slideIndex) => {
+    setCurrentIndex(slideIndex);
+  };
   return (
     <>
       <div className="hero min-h-screen bg-base-200 ">
@@ -48,7 +101,7 @@ const Home = () => {
         </div>
       </div>
       {/* course */}
-      <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
+      <div className="mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
         <h4 className="font-bold md:text-4xl text-3xl text-center">
           Making learning easier and more convenient for you.
         </h4>
@@ -121,122 +174,41 @@ const Home = () => {
         </div>
       </div>
       {/* carousel start */}
-      <div className="carouselCC container p-[5rem] m-auto">
-        <div className="">
-          <div>
-            <h4
-              className="font-bold md:text-3xl text-3xl text-center pt-8 pb-8"
-              style={{ textDecoration: "underline" }}
+      
+
+      <div className="max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group">
+      <h1 className="font-bold md:text-4xl text-2xl text-center py-3">
+            <span className="text-center">Our Family</span>
+          </h1>
+        <div
+          style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+          className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
+        ></div>
+        {/* Left Arrow */}
+        <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+          <BsChevronCompactLeft onClick={prevSlide} size={30} />
+        </div>
+        {/* Right Arrow */}
+        <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+          <BsChevronCompactRight onClick={nextSlide} size={30} />
+        </div>
+        <div className="flex top-4 justify-center py-2">
+          {slides.map((slide, slideIndex) => (
+            <div
+              key={slideIndex}
+              onClick={() => goToSlide(slideIndex)}
+              className="text-2xl cursor-pointer"
             >
-              Our Family
-            </h4>
-          </div>
-          <Swiper
-            spaceBetween={30}
-            centeredSlides={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper"
-          >
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img1}
-                alt=" slide 1"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img2}
-                alt=" slide 2"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img3}
-                alt="slide 3"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img4}
-                alt=" slide 4"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img5}
-                alt="slide 5"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img6}
-                alt="slide 6"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img7}
-                alt="slide 7"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img8}
-                alt="slide 8"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img9}
-                alt="slide 9"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img10}
-                alt="slide 10"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img11}
-                alt="slide 11"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="object-fill w-full h-100 rounded-xl"
-                src={img12}
-                alt="slide 12"
-              />
-            </SwiperSlide>
-          </Swiper>
+              <RxDotFilled />
+            </div>
+          ))}
         </div>
       </div>
       {/* carousel end */}
       {/* meet your instructor */}
-      <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16 py-10">
+      <div className="mx-auto px-4 sm:px-8 md:px-12 lg:px-16 py-10">
         <div className="flex flex-col lg:flex-row border-b-2 pb-5 border-blue-900">
-          <h1 className="font-bold md:text-4xl text-2xl">
+          <h1 className="font-bold md:text-4xl text-2xl text-center mt-4">
             <span className="">Meet your</span>
             <span className="text-[#5b67a5]"> instructor </span>
           </h1>
@@ -261,7 +233,7 @@ const Home = () => {
       </div>
 
       {/* youtube family */}
-      <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-20 pb-20">
+      <div className="mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-20 pb-20">
         <h4 className="font-bold md:text-4xl text-3xl text-center">
           Join our YouTube family
         </h4>

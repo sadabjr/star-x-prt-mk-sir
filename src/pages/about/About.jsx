@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import heroImg from "../../asssets/images/mk.jpg";
 import about from "../../asssets/images/about.png";
@@ -8,20 +8,127 @@ import ranjeet from "../../asssets/images/Ranjeet.jpg";
 import deepak from "../../asssets/images/deepak.jpg";
 import Sujay from "../../asssets/images/Sujay.jpg";
 import Mohan from "../../asssets/images/mohan.jpg";
-
+import { Link, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Loader from "../../components/loader/Loader";
+
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { RxDotFilled } from "react-icons/rx";
+
+import {
+  getAllStudents,
+  deleteTestimonial,
+  getAllTestimonial,
+} from "../../Firebase";
 
 // import required modules
 
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 const About = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [filteredBlogs, setFilteredBlogs] = useState([]);
+  const [blogsLoaded, setBlogsLoaded] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
+
+  // Fetch Students
+  const fetchAllStudents = async () => {
+    const result = await getAllStudents();
+    setBlogsLoaded(true);
+    if (!result) {
+      return;
+    }
+    const tempBlogs = [];
+    result.forEach((doc) => tempBlogs.push({ ...doc.data(), bid: doc.id }));
+    setBlogs(tempBlogs);
+    setFilteredBlogs(tempBlogs);
+  };
+
+  const handleSearch = (e) => {
+    const searchQuery = e.target.value.toLowerCase();
+    setSearchInput(searchQuery);
+
+    const filteredStudents = blogs.filter((student) => {
+      return student.sid.toLowerCase().includes(searchQuery);
+    });
+
+    setFilteredBlogs(filteredStudents);
+  };
+
+  // for testimonial
+  const [testimonials, setTestimonials] = useState([]);
+  const [testimonialLoaded, setteStimonialLoaded] = useState(false);
+  const [filteredTestimonial, setFilteredTestimonial] = useState([]);
+
+  // fetch all testimonial
+  const fetchAllTestimonial = async () => {
+    const result = await getAllTestimonial();
+    setteStimonialLoaded(true);
+    if (!result) {
+      return;
+    }
+    const tempTestimonial = [];
+    result.forEach((doc) =>
+      tempTestimonial.push({ ...doc.data(), tid: doc.id })
+    );
+    setTestimonials(tempTestimonial);
+    setFilteredTestimonial(tempTestimonial);
+  };
+
+  const handleTestimonial = async (tid, title) => {
+    await deleteTestimonial(tid);
+    fetchAllTestimonial();
+  };
+
+  useEffect(() => {
+    fetchAllStudents();
+    fetchAllTestimonial();
+  }, []);
+
+  const slides = [
+    {
+      url: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2620&q=80",
+    },
+    {
+      url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
+    },
+    {
+      url: "https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80",
+    },
+
+    {
+      url: "https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80",
+    },
+    {
+      url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === slides.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const goToSlide = (slideIndex) => {
+    setCurrentIndex(slideIndex);
+  };
+
   return (
     <div className="min-h-screen z-0">
-      <div className="container mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
+      <div className=" mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
         <h4
           className="font-bold md:text-3xl text-3xl text-center pt-10"
           style={{ textDecoration: "underline" }}
@@ -171,67 +278,76 @@ const About = () => {
 
           {/* carsual */}
 
-          {/* testimonials */}
-
-          <div className="carouselCC container p-[5rem] m-auto">
-            <div className="">
-              <div>
-                <h4 className="font-bold md:text-3xl text-3xl text-center pt-8 pb-8">
-                  Our Brilliant Students
-                </h4>
-              </div>
-              <Swiper
-                spaceBetween={30}
-                centeredSlides={true}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                }}
-                pagination={{
-                  clickable: true,
-                }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
-              >
-                <SwiperSlide>
-                  <div className="flex flex-col justify-center items-center py-5">
-                    <img
-                      src={Sujay}
-                      alt=""
-                      className="w-20 h-20 rounded-full dark:bg-gray-500 rounded-circle"
-                    />
-                    <blockquote className="max-w-lg text-lg italic font-medium text-center">
-                      "Topper of the CCC Exam August 2023"
-                    </blockquote>
-                    <div className="text-center dark:text-gray-400">
-                      <p>Sujay</p>
-                      <p>Marks: CCC 100/86</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="flex flex-col justify-center items-center py-5">
-                    <img
-                      src={Mohan}
-                      alt=""
-                      className="w-20 h-20 rounded-full dark:bg-gray-500 rounded-circle"
-                    />
-                    <blockquote className="max-w-lg text-lg italic font-medium text-center">
-                      "Topper of the CCC Exam August 2023"
-                    </blockquote>
-                    <div className="text-center dark:text-gray-400">
-                      <p>Mohan</p>
-                      <p>Marks: ADCA 100/88</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide></SwiperSlide>
-              </Swiper>
+          {/* student data */}
+          <div className="">
+            <div className="flex justify-center items-center m-4 font-semibold">
+              <h1 className="text-[2rem] text-center">Monthly Exam List</h1>
             </div>
+            {filteredBlogs && blogsLoaded ? (
+              filteredBlogs.length > 0 ? (
+                <div className="overflow-x-auto">
+                  <table className="table">
+                    <thead className="bg-gray-200">
+                      <tr className="text-[1rem]">
+                        <th>Sr. No.</th>
+                        <th>Image</th>
+                        <th>Student Name</th>
+                        <th>SID</th>
+                        <th>Batch</th>
+                        <th>Enrolled course</th>
+
+                        <th>Month Name</th>
+                        <th>Max Mark</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredBlogs.map((item, index) => (
+                        <tr key={item.bid}>
+                          <td className="flex items-center space-x-3">
+                            <div className="font-bold">{index + 1}.</div>
+                          </td>
+                          <td>
+                            <div className="flex items-center space-x-3">
+                              <div className="avatar">
+                                <div className="mask mask-squircle w-12 h-12">
+                                  <img src={item.thumbnail} alt="Thumbnail" />
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div className="font-semibold">{item.name}</div>
+                          </td>
+                          <td className="font-semibold">{item.sid}</td>
+                          <td className="font-semibold">{item.batch}</td>
+                          <td className="font-semibold">
+                            {item.enrolled_course}
+                          </td>
+
+                          <td className="font-semibold">{item.test_month}</td>
+                          <td className="font-semibold">{item.max_mark}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="alert">
+                  <div className="text-red-500">
+                    <strong>No Students Found!</strong>
+                  </div>
+                </div>
+              )
+            ) : (
+              <Loader />
+            )}
           </div>
+
+          {/* testimonials */}
         </div>
       </div>
+
+     
     </div>
   );
 };
