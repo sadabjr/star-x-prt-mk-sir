@@ -84,43 +84,6 @@ const About = () => {
     fetchAllTestimonial();
   }, []);
 
-  const slides = [
-    {
-      url: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2620&q=80",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80",
-    },
-
-    {
-      url: "https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
-    },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
-
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
-
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
-  };
-
   return (
     <div className="min-h-screen z-0">
       <div className=" mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
@@ -271,48 +234,66 @@ const About = () => {
             </div>
           </div>
 
-          {/* carousel start */}
-          <div className="max-w-[1400px] h-[500px] w-full m-auto py-16 px-4 relative group">
-            <h1 className="font-bold md:text-4xl text-2xl text-center py-3">
-              <span className="text-center">Our Family</span>
+          {/* testimonial */}
+          <div className="my-[5rem]">
+            <h1 className="text-center text-[2rem] font-bold my-3">
+              Our Toppers
             </h1>
-            <div className="flex flex-col justify-center items-center">
-              <div
-                style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-                className="w-32 h-32 rounded-full bg-center bg-cover duration-500"
-              ></div>
-              <p>name</p>
-              <p>Description</p>
-              <p>max_mark</p>
-              <p></p>
-            </div>
-
-            {/* Left Arrow */}
-            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-              <BsChevronCompactLeft onClick={prevSlide} size={30} />
-            </div>
-            {/* Right Arrow */}
-            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-              <BsChevronCompactRight onClick={nextSlide} size={30} />
-            </div>
-            <div className="flex top-4 justify-center py-2">
-              {slides.map((slide, slideIndex) => (
-                <div
-                  key={slideIndex}
-                  onClick={() => goToSlide(slideIndex)}
-                  className="text-2xl cursor-pointer"
-                >
-                  <RxDotFilled />
+            <div className="flex flex-wrap justify-center items-center gap-4 ">
+              {filteredTestimonial.map((item, index) => (
+                <div key={item.tid} className="relative aspect-w-1 aspect-h-1">
+                  <div className="bg-white shadow-lg rounded-lg p-4 w-[20rem]">
+                    <img
+                      src={item.thumbnail}
+                      alt={item.name}
+                      className="w-20 h-20 rounded-full mx-auto mb-4 shadow-md"
+                    />
+                    <blockquote className="text-lg italic font-medium text-center mb-4">
+                      {item.desc}
+                    </blockquote>
+                    <div className="text-center text-gray-400">
+                      <p className="text-lg font-semibold">{item.name}</p>
+                      <p>Marks: {item.max_mark}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-          {/* carousel end */}
 
           {/* student data */}
           <div className="">
-            <div className="flex justify-center items-center m-4 font-semibold">
-              <h1 className="text-[2rem] text-center">Monthly Exam List</h1>
+            <div className="flex col justify-center items-center m-4 font-semibold">
+              <div className="">
+                <div className="p-4">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      className="p-2 pl-8 rounded border border-gray-200 bg-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent w-full max-w-md mx-auto"
+                      placeholder="Search by SID..."
+                      value={searchInput}
+                      onChange={handleSearch}
+                    />
+                    <svg
+                      className="w-4 h-4 absolute left-2.5 top-3.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </div>
+                  <h1 className="text-2xl md:text-3xl text-center mt-4">
+                    Monthly Exam List
+                  </h1>
+                </div>
+              </div>
             </div>
             {filteredBlogs && blogsLoaded ? (
               filteredBlogs.length > 0 ? (
