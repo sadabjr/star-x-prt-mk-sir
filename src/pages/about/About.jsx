@@ -61,13 +61,13 @@ const About = () => {
 
   // for testimonial
   const [testimonials, setTestimonials] = useState([]);
-  const [testimonialLoaded, setteStimonialLoaded] = useState(false);
+  const [testimonialLoaded, setTestimonialLoaded] = useState(false);
   const [filteredTestimonial, setFilteredTestimonial] = useState([]);
 
   // fetch all testimonial
   const fetchAllTestimonial = async () => {
     const result = await getAllTestimonial();
-    setteStimonialLoaded(true);
+    setTestimonialLoaded(true);
     if (!result) {
       return;
     }
@@ -77,11 +77,6 @@ const About = () => {
     );
     setTestimonials(tempTestimonial);
     setFilteredTestimonial(tempTestimonial);
-  };
-
-  const handleTestimonial = async (tid, title) => {
-    await deleteTestimonial(tid);
-    fetchAllTestimonial();
   };
 
   useEffect(() => {
@@ -276,7 +271,43 @@ const About = () => {
             </div>
           </div>
 
-          {/* carsual */}
+          {/* carousel start */}
+          <div className="max-w-[1400px] h-[500px] w-full m-auto py-16 px-4 relative group">
+            <h1 className="font-bold md:text-4xl text-2xl text-center py-3">
+              <span className="text-center">Our Family</span>
+            </h1>
+            <div className="flex flex-col justify-center items-center">
+              <div
+                style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+                className="w-32 h-32 rounded-full bg-center bg-cover duration-500"
+              ></div>
+              <p>name</p>
+              <p>Description</p>
+              <p>max_mark</p>
+              <p></p>
+            </div>
+
+            {/* Left Arrow */}
+            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+              <BsChevronCompactLeft onClick={prevSlide} size={30} />
+            </div>
+            {/* Right Arrow */}
+            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+              <BsChevronCompactRight onClick={nextSlide} size={30} />
+            </div>
+            <div className="flex top-4 justify-center py-2">
+              {slides.map((slide, slideIndex) => (
+                <div
+                  key={slideIndex}
+                  onClick={() => goToSlide(slideIndex)}
+                  className="text-2xl cursor-pointer"
+                >
+                  <RxDotFilled />
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* carousel end */}
 
           {/* student data */}
           <div className="">
@@ -346,8 +377,6 @@ const About = () => {
           {/* testimonials */}
         </div>
       </div>
-
-     
     </div>
   );
 };

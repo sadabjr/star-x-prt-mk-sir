@@ -227,17 +227,10 @@ const Admin = () => {
                       <td>
                         <div className="font-semibold">{item.name}</div>
                       </td>
-                      {/* <td className="font-semibold">{item.sid}</td> */}
+                      
                       <td className="font-semibold">{item.desc}</td>
                       <td className="font-semibold">{item.max_mark}</td>
-                      {/* <td>
-                        <Link
-                          to={`/update-student/${item.bid}`}
-                          className="btn btn-success"
-                        >
-                          Edit
-                        </Link>
-                      </td> */}
+                      
                       <td>
                         <button
                           className="btn btn-error"

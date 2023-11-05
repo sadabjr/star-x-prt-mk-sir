@@ -174,8 +174,6 @@ const Home = () => {
         </div>
       </div>
       {/* carousel start */}
-      
-
       <div className="max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group">
       <h1 className="font-bold md:text-4xl text-2xl text-center py-3">
             <span className="text-center">Our Family</span>
