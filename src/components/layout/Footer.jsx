@@ -11,13 +11,13 @@ const Footer = () => {
             <img className="w-[10rem]" src={logo} alt="logo" />
           </div>
           <p>
-            <i class="fa-solid fa-building-columns "></i> Star X-Prt
-            Computer Technical Institute
+            <i class="fa-solid fa-building-columns "></i> Star X-Prt Computer
+            Technical Institute
           </p>
           <p>
-            <i class="fa-solid fa-location-dot "></i> Address- Near- SBI
-            Bank Shanichara Road, Kohinoor Complex, <br /> &nbsp;&nbsp;&nbsp; Dhanghata Sant
-            Kabir Nagar 272162
+            <i class="fa-solid fa-location-dot "></i> Address- Near- SBI Bank
+            Shanichara Road, Kohinoor Complex, <br /> &nbsp;&nbsp;&nbsp;
+            Dhanghata Sant Kabir Nagar 272162
           </p>
           <p>
             <i class="fa-solid fa-map-location-dot "></i>{" "}
@@ -57,7 +57,7 @@ const Footer = () => {
             </a>
           </div>
         </nav>
-        {/* <nav>
+        <nav>
           <header className="footer-title">Links</header>
           <Link to="/">Home</Link>
           <Link to="/courses">Courses</Link>
@@ -65,7 +65,6 @@ const Footer = () => {
           <Link to="/about">About us</Link>
           <Link to="/contact">Contact</Link>
         </nav>
-        */}
       </footer>
     </>
   );

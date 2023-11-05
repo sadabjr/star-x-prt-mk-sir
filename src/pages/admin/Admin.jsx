@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getAllStudents, deleteBlog, deleteTestimonial, getAllTestimonial } from "../../Firebase";
+import {
+  getAllStudents,
+  deleteBlog,
+  deleteTestimonial,
+  getAllTestimonial,
+} from "../../Firebase";
 import Loader from "../../components/loader/Loader";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +16,8 @@ const Admin = () => {
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
-   // Fetch Students
-   const fetchAllStudents = async () => {
+  // Fetch Students
+  const fetchAllStudents = async () => {
     const result = await getAllStudents();
     setBlogsLoaded(true);
     if (!result) {
@@ -34,9 +39,6 @@ const Admin = () => {
   const [testimonialLoaded, setteStimonialLoaded] = useState(false);
   const [filteredTestimonial, setFilteredTestimonial] = useState([]);
 
-
- 
-
   // fetch all testimonial
   const fetchAllTestimonial = async () => {
     const result = await getAllTestimonial();
@@ -45,12 +47,12 @@ const Admin = () => {
       return;
     }
     const tempTestimonial = [];
-    result.forEach((doc) => tempTestimonial.push({ ...doc.data(), tid: doc.id }));
+    result.forEach((doc) =>
+      tempTestimonial.push({ ...doc.data(), tid: doc.id })
+    );
     setTestimonials(tempTestimonial);
     setFilteredTestimonial(tempTestimonial);
   };
-
-  
 
   const handleTestimonial = async (tid, title) => {
     await deleteTestimonial(tid);
@@ -75,9 +77,9 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="p-5 font-semibold flex justify-between items-center">
-        <div className="">
-          <div className="inline-flex flex-col justify-center relative text-gray-500">
+      <div className="p-5 font-semibold flex flex-col sm:flex-row justify-center items-center">
+        <div className="mb-3 sm:mb-0 sm:mr-4 sm:order-1">
+          <div className="inline-flex flex-col relative text-gray-500">
             <div className="relative">
               <input
                 type="text"
@@ -103,14 +105,22 @@ const Admin = () => {
             </div>
           </div>
         </div>
-        <h1 className="text-center font-bold text-2xl">STUDENT LIST</h1>
-        <Link to="/create-testimonial" className="btn btn-active btn-secondary">
-          New Testimonial
-        </Link>
-        <Link to="/new-admission" className="btn btn-active btn-secondary">
-          New Student
-        </Link>
+        <h1 className="text-center font-bold text-2xl mb-3 sm:mb-0 sm:order-2 sm:mx-auto">
+          STUDENT LIST
+        </h1>
+        <div className="flex justify-center items-center mt-3 sm:mt-0 sm:order-3">
+          <Link
+            to="/create-testimonial"
+            className="btn btn-active btn-secondary sm:mr-4"
+          >
+            New Testimonial
+          </Link>
+          <Link to="/new-admission" className="btn btn-active btn-secondary">
+            New Student
+          </Link>
+        </div>
       </div>
+
       <div className="">
         {filteredBlogs && blogsLoaded ? (
           filteredBlogs.length > 0 ? (
@@ -193,7 +203,10 @@ const Admin = () => {
       {/* testimonial data */}
       <div className="">
         <div className="flex justify-center items-center m-4 font-semibold">
-          <h1 className="text-[2rem]">Topper Student list</h1>
+          <h1 className="text-[2rem]"></h1>
+          <h1 className="text-center font-bold text-2xl mb-3 sm:mb-0 sm:order-2 sm:mx-auto">
+          TOPPER STUDENT LIST
+        </h1>
         </div>
         {filteredTestimonial && testimonialLoaded ? (
           filteredTestimonial.length > 0 ? (
@@ -227,14 +240,16 @@ const Admin = () => {
                       <td>
                         <div className="font-semibold">{item.name}</div>
                       </td>
-                      
+
                       <td className="font-semibold">{item.desc}</td>
                       <td className="font-semibold">{item.max_mark}</td>
-                      
+
                       <td>
                         <button
                           className="btn btn-error"
-                          onClick={() => handleTestimonial(item.tid, item.title)}
+                          onClick={() =>
+                            handleTestimonial(item.tid, item.title)
+                          }
                         >
                           Delete
                         </button>
