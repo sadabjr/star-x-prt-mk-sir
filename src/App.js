@@ -14,6 +14,7 @@ import Login from "./pages/login/Login";
 import UpdateStudent from "./pages/updateStudent/UpdateStudent";
 import NewTestimonial from "./pages/newTest/NewTestimonial";
 import NotesList from "./pages/note-list/NotesList";
+import PdfViewer from "./pages/PdfViewer/PdfViewer";
 
 function App() {
   return (
@@ -30,9 +31,11 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/new-admission" element={<NewStudent />} />
           <Route path="/update-student/:bid" element={<UpdateStudent />} />
-          <Route path="/notes" element={<NotesList />} />
+          {/* <Route path="/notes" element={<NotesList />} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/create-testimonial" element={<NewTestimonial/>} />
+          <Route path="/view-pdf" element={<PdfViewer/>} />
+          
         </Routes>
         <Footer />
       </Router>
