@@ -2,5 +2,10 @@
 
 body{
     font-family: 'Poppins', sans-serif;
+    -webkit-touch-callout: none; /* Disable callouts */
+    -webkit-user-select: none; /* Disable selection */
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-

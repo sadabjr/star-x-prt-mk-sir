@@ -13,6 +13,7 @@ import NewStudent from "./pages/newStudent/NewStudent";
 import Login from "./pages/login/Login";
 import UpdateStudent from "./pages/updateStudent/UpdateStudent";
 import NewTestimonial from "./pages/newTest/NewTestimonial";
+import NotesList from "./pages/note-list/NotesList";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/new-admission" element={<NewStudent />} />
           <Route path="/update-student/:bid" element={<UpdateStudent />} />
+          <Route path="/notes" element={<NotesList />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create-testimonial" element={<NewTestimonial/>} />
         </Routes>
