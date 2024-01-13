@@ -38,6 +38,22 @@ const addTestimonial = async (testimonial) => {
   await addDoc(collectionTesti, {...testimonial})
 }
 
+//-----------NOTES --------------
+const addDemoNotes = async (demoNotes) => {
+  const collectionDemoNotes = collection(db, "DemoNotes");
+  await addDoc(collectionDemoNotes, {...demoNotes})
+}
+
+const getAllDemoNotes = async () => {
+  return await getDocs(collection(db, "DemoNotes"));
+};
+
+const deleteDemoNotes = async (tid) => {
+  const docRef = doc(db, "DemoNotes", tid);
+  await deleteDoc(docRef);
+};
+
+
 //-----------Get All Blogs --------------
 
 const getAllStudents = async () => {
@@ -88,6 +104,9 @@ export {
   addTestimonial,
   getAllTestimonial,
   deleteTestimonial,
+  addDemoNotes,
+  getAllDemoNotes,
+  deleteDemoNotes
 };
 
 

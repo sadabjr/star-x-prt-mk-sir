@@ -15,6 +15,8 @@ import UpdateStudent from "./pages/updateStudent/UpdateStudent";
 import NewTestimonial from "./pages/newTest/NewTestimonial";
 import NotesList from "./pages/note-list/NotesList";
 import PdfViewer from "./pages/PdfViewer/PdfViewer";
+import UploadDemoNotes from "./pages/upload-demo-note/UploadDemoNotes";
+import PdfList from "./pages/PdfList/PdfList";
 
 function App() {
   return (
@@ -31,9 +33,11 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/new-admission" element={<NewStudent />} />
           <Route path="/update-student/:bid" element={<UpdateStudent />} />
-          {/* <Route path="/notes" element={<NotesList />} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/create-testimonial" element={<NewTestimonial/>} />
+          {/* upload notes */}
+          <Route path="/upload-demo-note" element={<UploadDemoNotes/>} />
+          <Route path="/pdf-list" element={<PdfList />} />
           <Route path="/view-pdf" element={<PdfViewer/>} />
           
         </Routes>

@@ -4,6 +4,8 @@ import {
   deleteBlog,
   deleteTestimonial,
   getAllTestimonial,
+  getAllDemoNotes,
+  deleteDemoNotes
 } from "../../Firebase";
 import Loader from "../../components/loader/Loader";
 import { Link } from "react-router-dom";
@@ -37,6 +39,9 @@ const Admin = () => {
   // for testimonial
   const [testimonials, setTestimonials] = useState([]);
   const [testimonialLoaded, setteStimonialLoaded] = useState(false);
+  const [demoNotes, setDemoNotes] = useState([]);
+  const [demoNotesLoaded, setDemoNotesLoaded] = useState(false);
+  const [filteredDemoNotes, setFilteredDemoNotes] = useState(false);
   const [filteredTestimonial, setFilteredTestimonial] = useState([]);
 
   // fetch all testimonial
@@ -70,9 +75,28 @@ const Admin = () => {
     setFilteredBlogs(filteredStudents);
   };
 
+  const fetchAllDemoNotes = async () => {
+    const result = await getAllDemoNotes();
+    setDemoNotesLoaded(true);
+    if (!result) {
+      return;
+    }
+    const tempDemoNotes = [];
+    result.forEach((doc) =>
+    tempDemoNotes.push({ ...doc.data(), tid: doc.id })
+    );
+    setDemoNotes(tempDemoNotes);
+    setFilteredDemoNotes(tempDemoNotes);
+  };
+  const handleDemoNotes = async (tid, title) => {
+    await deleteDemoNotes(tid);
+    fetchAllDemoNotes();
+  };
+
   useEffect(() => {
     fetchAllStudents();
     fetchAllTestimonial();
+    fetchAllDemoNotes();
   }, []);
 
   return (
@@ -111,12 +135,15 @@ const Admin = () => {
         <div className="flex justify-center items-center mt-3 sm:mt-0 sm:order-3">
           <Link
             to="/create-testimonial"
-            className="btn btn-active btn-secondary sm:mr-4"
+            className="btn btn-xs btn-active btn-secondary sm:mr-4"
           >
             New Testimonial
           </Link>
-          <Link to="/new-admission" className="btn btn-active btn-secondary">
+          <Link to="/new-admission" className="btn btn-xs btn-active btn-secondary sm:mr-4">
             New Student
+          </Link>
+          <Link to="/upload-demo-note" className="btn btn-xs btn-active btn-secondary">
+            Demo-Notes
           </Link>
         </div>
       </div>
@@ -170,14 +197,14 @@ const Admin = () => {
                       <td>
                         <Link
                           to={`/update-student/${item.bid}`}
-                          className="btn btn-success"
+                          className="btn btn-success btn-xs"
                         >
                           Edit
                         </Link>
                       </td>
                       <td>
                         <button
-                          className="btn btn-error"
+                          className="btn btn-error btn-xs"
                           onClick={() => handleDeletion(item.bid, item.title)}
                         >
                           Delete
@@ -246,7 +273,7 @@ const Admin = () => {
 
                       <td>
                         <button
-                          className="btn btn-error"
+                          className="btn btn-error btn-xs"
                           onClick={() =>
                             handleTestimonial(item.tid, item.title)
                           }
@@ -263,6 +290,79 @@ const Admin = () => {
             <div className="alert">
               <div className="text-red-500">
                 <strong>No Students Found!</strong>
+              </div>
+            </div>
+          )
+        ) : (
+          <Loader />
+        )}
+      </div>
+
+
+
+      {/*demo notes list */}
+      <div className="">
+        <div className="flex justify-center items-center m-4 font-semibold">
+          <h1 className="text-[2rem]"></h1>
+          <h1 className="text-center font-bold text-2xl mb-3 sm:mb-0 sm:order-2 sm:mx-auto">
+          Demo Notes List
+        </h1>
+        </div>
+        {filteredDemoNotes && demoNotesLoaded ? (
+          filteredDemoNotes.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="table">
+                <thead className="bg-gray-200">
+                  <tr className="text-[1rem]">
+                    <th>Sr. No.</th>
+                    {/* <th>file</th> */}
+                    <th>file Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredDemoNotes.map((item, index) => (
+                    <tr key={item.tid}>
+                      <td className="flex items-center space-x-3">
+                        <div className="font-bold">{index + 1}.</div>
+                      </td>
+                      {/* <td>
+                        <div className="flex items-center space-x-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle w-12 h-12">
+                              <img src={item.thumbnail} alt="Thumbnail" />
+                            </div>
+                          </div>
+                        </div>
+                      </td> */}
+                      <td>
+                        <div className="font-semibold">{item.name}</div>
+                      </td>
+
+                      <td className="font-semibold">{item.desc}</td>
+                      <td className="font-semibold">Rs. {item.price}</td>
+
+                      <td>
+                        <button
+                          className="btn btn-error"
+                          onClick={() =>
+                            handleDemoNotes(item.tid, item.title)
+                          }
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="alert">
+              <div className="text-red-500">
+                <strong>No Data Found!</strong>
               </div>
             </div>
           )

@@ -134,7 +134,7 @@ const Header = () => {
               <Link to="/courses">Courses</Link>
             </li>
             <li>
-              <Link to="/view-pdf">Notes</Link>
+              <Link to="/pdf-list">Download Pdf Notes</Link>
             </li>
             <li>
               <Link to="/tutorials">Tutorials</Link>
