@@ -38,7 +38,7 @@ function App() {
           {/* upload notes */}
           <Route path="/upload-demo-note" element={<UploadDemoNotes/>} />
           <Route path="/pdf-list" element={<PdfList />} />
-          <Route path="/view-pdf" element={<PdfViewer/>} />
+          <Route path="/pdf-viewer/:pdfId" element={<PdfViewer/>} />
           
         </Routes>
         <Footer />

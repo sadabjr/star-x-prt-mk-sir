@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getAllDemoNotes } from "../../Firebase";
 import Loader from "../../components/loader/Loader";
+import { Link } from "react-router-dom";
+import { pdfjs } from 'react-pdf';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
 
 
 const PdfList = () => {
@@ -49,10 +56,12 @@ const PdfList = () => {
           </div>
         </div>
         {filteredDemoNotes && demoNotesLoaded ? (
-          filteredDemoNotes.length > 0 ? (
-            <div className="flex flex-wrap justify-center items-start">
-              {filteredDemoNotes.map((item, index) => (
-                <div key={index} className="flex">
+        filteredDemoNotes.length > 0 ? (
+          <div className="flex flex-wrap justify-center items-start">
+            {filteredDemoNotes.map((item, index) => (
+              <div key={index} className="flex">
+                <Link to={`/pdf-viewer/${item.bid}`}>
+                  {/* Link to the PdfViewer page with the PDF id */}
                   <div className="card w-[17rem] bg-primary text-primary-content m-3 flex-grow">
                     <div className="card-body flex flex-col justify-between">
                       <div>
@@ -66,10 +75,11 @@ const PdfList = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
+                </Link>
+              </div>
+            ))}
+          </div>
+        )  : (
             <div className="alert">
               <h1 className="text-center m-auto text-2xl font-bold text-danger-600">
                 No notes Found!
