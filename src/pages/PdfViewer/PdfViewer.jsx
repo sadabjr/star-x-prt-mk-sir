@@ -41,7 +41,6 @@ const PdfViewer = () => {
         <p>
           Page {pageNumber} of {numPages}
         </p>
-       
           <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
             {Array.apply(null, Array(numPages))
               .map((x, i) => i + 1)
@@ -55,7 +54,6 @@ const PdfViewer = () => {
                 )
               })}
           </Document>
-    
       </div>
     </div>
   );
