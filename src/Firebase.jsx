@@ -6,7 +6,9 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage";
 import { updateDoc } from "firebase/firestore";
-import {doc, getFirestore, setDoc, getDoc, addDoc, collection, getDocs, query, where, deleteDoc,} from "firebase/firestore";
+import {doc, getFirestore, setDoc, getDoc, addDoc, collection, getDocs, query, where, deleteDoc} from "firebase/firestore";
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCIP9ktaH5ougYWCJh-nu6SLsUqTxqB4Rk",
@@ -52,6 +54,20 @@ const deleteDemoNotes = async (tid) => {
   const docRef = doc(db, "DemoNotes", tid);
   await deleteDoc(docRef);
 };
+
+
+const getDemoNoteById = async (demoNoteId) => {
+  const demoNoteRef = doc(db, "DemoNotes", demoNoteId);
+  const demoNoteSnapshot = await getDoc(demoNoteRef);
+
+  if (demoNoteSnapshot.exists()) {
+    return { id: demoNoteSnapshot.id, ...demoNoteSnapshot.data() };
+  } else {
+    console.error("Demo note does not exist");
+    return null;
+  }
+};
+
 
 
 //-----------Get All Blogs --------------
@@ -106,7 +122,8 @@ export {
   deleteTestimonial,
   addDemoNotes,
   getAllDemoNotes,
-  deleteDemoNotes
+  deleteDemoNotes,
+  getDemoNoteById
 };
 
 

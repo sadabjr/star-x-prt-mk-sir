@@ -16,7 +16,7 @@ const PdfList = () => {
   const [demoNotesLoaded, setDemoNotesLoaded] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
-  // Fetch Students
+  // Fetch notes 
   const fetchAllDemoNotes = async () => {
     const result = await getAllDemoNotes();
     setDemoNotesLoaded(true);

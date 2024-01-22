@@ -1,41 +1,63 @@
-import { useState } from 'react';
-import { Document, Page } from 'react-pdf';
+import { useState, useEffect } from "react";
+import { Document, Page } from "react-pdf";
+import { useParams } from "react-router-dom";
+import { getDemoNoteById } from "../../Firebase";
 
-const PdfViewer = ({ pdfUrl }) => {
+const PdfViewer = () => {
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
+  const [pdfPath, setPdfPath] = useState(null); // Rename the state variable
+  const { pdfId } = useParams();
 
-  function onDocumentLoadSuccess({ numPages }){
+  useEffect(() => {
+    const fetchPdfPath = async () => {
+      try {
+        const demoNote = await getDemoNoteById(pdfId);
+        console.log("Fetched demoNote:", demoNote);
+    
+        if (demoNote && demoNote.pdfPath) {
+          const pdfPath = demoNote.pdfPath;
+          console.log("Resolved pdfPath:", pdfPath);
+          setPdfPath(pdfPath);
+        } else {
+          console.error("PDF path not found in demoNote:", demoNote);
+        }
+      } catch (error) {
+        console.error("Error fetching PDF path:", error);
+      }
+    };
+    
+    fetchPdfPath(); // Call the fetchPdfPath function when the component mounts or pdfId changes
+  }, [pdfId]);
+  
+
+  function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
 
   return (
-    <div className='h-screen'>
-      <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
-        <Page pageNumber={pageNumber} />
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+    <div className="h-screen ">
+      <div className="pdf-div m-auto">
+        <p>
+          Page {pageNumber} of {numPages}
+        </p>
+        {pdfPath && (
+          <Document file={pdfPath} onLoadSuccess={onDocumentLoadSuccess}>
+            {Array.apply(null, Array(numPages))
+              .map((x, i) => i + 1)
+              .map((page) => (
+                <Page
+                  key={page}
+                  pageNumber={page}
+                  renderTextLayer={false}
+                  renderAnnotationLayer={false}
+                />
+              ))}
+          </Document>
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default PdfViewer;
-
-
-// import React from "react";
-// import { Document, Page } from "react-pdf";
-
-
-// const PdfViewer = ({ pdfUrl }) => {
-//   return (
-//     <div className="h-screen">
-//       <Document file={pdfUrl}>
-//         <Page pageNumber={1} />
-//       </Document>
-//     </div>
-//   );
-// };
-
-// export default PdfViewer;
