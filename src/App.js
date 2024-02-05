@@ -17,6 +17,7 @@ import NotesList from "./pages/note-list/NotesList";
 import PdfViewer from "./pages/PdfViewer/PdfViewer";
 import UploadDemoNotes from "./pages/upload-demo-note/UploadDemoNotes";
 import PdfList from "./pages/PdfList/PdfList";
+import AdmitCard from "./pages/adminCard/AdmitCard";
 
 function App() {
   return (
@@ -38,7 +39,9 @@ function App() {
           {/* upload notes */}
           <Route path="/upload-demo-note" element={<UploadDemoNotes/>} />
           <Route path="/pdf-list" element={<PdfList />} />
+          {/* <Route path="/admit-card" element={<AdmitCard />} /> */}
           <Route path="/pdf-viewer/:pdfId" element={<PdfViewer/>} />
+          <Route path="admit-card" element={<AdmitCard/>} />
           
         </Routes>
         <Footer />
