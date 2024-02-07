@@ -40,6 +40,21 @@ const addTestimonial = async (testimonial) => {
   await addDoc(collectionTesti, {...testimonial})
 }
 
+// admit card
+const addAdmitCard = async (admitCard) => {
+  const admitCardCollection = collection(db, "AdmitCard");
+  await addDoc(admitCardCollection, {...admitCard})
+}
+
+const getAllAdmitCard = async () => {
+  return await getDocs(collection(db, "AdmitCard"));
+};
+
+const deleteAdmitCard = async (aid) => {
+  const admitRef = doc(db, "AdmitCard", aid);
+  await deleteDoc(admitRef);
+};
+
 //-----------NOTES --------------
 const addDemoNotes = async (demoNotes) => {
   const collectionDemoNotes = collection(db, "DemoNotes");
@@ -123,7 +138,10 @@ export {
   addDemoNotes,
   getAllDemoNotes,
   deleteDemoNotes,
-  getDemoNoteById
+  getDemoNoteById,
+  addAdmitCard,
+  getAllAdmitCard,
+  deleteAdmitCard
 };
 
 

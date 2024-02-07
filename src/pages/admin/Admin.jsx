@@ -5,7 +5,7 @@ import {
   deleteTestimonial,
   getAllTestimonial,
   getAllDemoNotes,
-  deleteDemoNotes
+  deleteDemoNotes,
 } from "../../Firebase";
 import Loader from "../../components/loader/Loader";
 import { Link } from "react-router-dom";
@@ -82,9 +82,7 @@ const Admin = () => {
       return;
     }
     const tempDemoNotes = [];
-    result.forEach((doc) =>
-    tempDemoNotes.push({ ...doc.data(), tid: doc.id })
-    );
+    result.forEach((doc) => tempDemoNotes.push({ ...doc.data(), tid: doc.id }));
     setDemoNotes(tempDemoNotes);
     setFilteredDemoNotes(tempDemoNotes);
   };
@@ -134,15 +132,27 @@ const Admin = () => {
         </h1>
         <div className="flex justify-center items-center mt-3 sm:mt-0 sm:order-3">
           <Link
+            to="/create-admit-card"
+            className="btn btn-xs btn-active btn-secondary sm:mr-4"
+          >
+            New Admit Card
+          </Link>
+          <Link
             to="/create-testimonial"
             className="btn btn-xs btn-active btn-secondary sm:mr-4"
           >
             New Testimonial
           </Link>
-          <Link to="/new-admission" className="btn btn-xs btn-active btn-secondary sm:mr-4">
+          <Link
+            to="/new-admission"
+            className="btn btn-xs btn-active btn-secondary sm:mr-4"
+          >
             New Student
           </Link>
-          <Link to="/upload-demo-note" className="btn btn-xs btn-active btn-secondary">
+          <Link
+            to="/upload-demo-note"
+            className="btn btn-xs btn-active btn-secondary"
+          >
             Demo-Notes
           </Link>
         </div>
@@ -232,8 +242,8 @@ const Admin = () => {
         <div className="flex justify-center items-center m-4 font-semibold">
           <h1 className="text-[2rem]"></h1>
           <h1 className="text-center font-bold text-2xl mb-3 sm:mb-0 sm:order-2 sm:mx-auto">
-          TOPPER STUDENT LIST
-        </h1>
+            TOPPER STUDENT LIST
+          </h1>
         </div>
         {filteredTestimonial && testimonialLoaded ? (
           filteredTestimonial.length > 0 ? (
@@ -298,15 +308,13 @@ const Admin = () => {
         )}
       </div>
 
-
-
       {/*demo notes list */}
       <div className="">
         <div className="flex justify-center items-center m-4 font-semibold">
           <h1 className="text-[2rem]"></h1>
           <h1 className="text-center font-bold text-2xl mb-3 sm:mb-0 sm:order-2 sm:mx-auto">
-          Demo Notes List
-        </h1>
+            Demo Notes List
+          </h1>
         </div>
         {filteredDemoNotes && demoNotesLoaded ? (
           filteredDemoNotes.length > 0 ? (
@@ -347,9 +355,7 @@ const Admin = () => {
                       <td>
                         <button
                           className="btn btn-error btn-xs"
-                          onClick={() =>
-                            handleDemoNotes(item.tid, item.title)
-                          }
+                          onClick={() => handleDemoNotes(item.tid, item.title)}
                         >
                           Delete
                         </button>

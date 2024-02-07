@@ -1,0 +1,18 @@
+/* print.css */
+
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    
+    .admin-card, .admin-card * {
+      visibility: visible;
+    }
+    
+    .admin-card {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+  
