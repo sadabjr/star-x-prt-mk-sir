@@ -101,15 +101,14 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../asssets/images/logo.png";
 import { useState } from "react";
 
-
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate(); // Set this to true when the user is logged in.
-  
-    const handleLogout = () => {
-      setIsLoggedIn(true);
-      navigate("/");
-    };
+
+  const handleLogout = () => {
+    setIsLoggedIn(true);
+    navigate("/");
+  };
   return (
     <>
       <div className="navbar bg-base-100 border-b shadow-sm">
@@ -140,14 +139,26 @@ const Header = () => {
               <Link to="/tutorials">Tutorials</Link>
             </li>
             <li>
-              <Link to="/about">About Us</Link>
+              <Link to="/download-admit-card">Admit Card</Link>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <details>
+                <summary>Pages</summary>
+                <ul className="p-2 bg-base-100 rounded-t-none">
+                  <li>
+                    <Link to="/about">About</Link>
+                  </li>
+                  <li>
+                    <Link to="/contact">Contact</Link>
+                  </li>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                </ul>
+              </details>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
+
+           
           </ul>
           <div className="dropdown dropdown-end hidden">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -173,12 +184,13 @@ const Header = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
+
               <li>
                 <Link to="/courses">Courses</Link>
               </li>
               <li>
-              <Link to="/pdf-list">Download Pdf Notes</Link>
-            </li>
+                <Link to="/pdf-list">Download Pdf Notes</Link>
+              </li>
               <li>
                 <Link to="/tutorials">Tutorials</Link>
               </li>
@@ -189,12 +201,12 @@ const Header = () => {
                 <Link to="/contact">Contact</Link>
               </li>
               <li>
-              {isLoggedIn ? (
-           <button onClick={handleLogout}>Log Out</button>
-               ) : (
-                 <Link to="/login">Login</Link>
-               )}
-               </li>
+                {isLoggedIn ? (
+                  <button onClick={handleLogout}>Log Out</button>
+                ) : (
+                  <Link to="/login">Login</Link>
+                )}
+              </li>
             </ul>
           </div>
         </div>

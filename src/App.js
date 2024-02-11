@@ -20,6 +20,7 @@ import PdfList from "./pages/PdfList/PdfList";
 import AdmitCard from "./pages/adminCard/AdmitCard";
 import CreateAdmitCard from "./pages/createAdmitCard/CreateAdmitCard";
 import AdmitCardList from "./pages/admitCardList/AdmitCardList";
+import DownloadAdmitCard from "./pages/downloadAdmitCard/DownloadAdmitCard";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/pdf-viewer/:pdfId" element={<PdfViewer/>} />
           <Route path="/create-admit-card" element={<CreateAdmitCard/>} />
           <Route path="/admit-card-list" element={<AdmitCardList/>} />
+          <Route path="/download-admit-card" element={<DownloadAdmitCard/>} />
         </Routes>
         <Footer />
       </Router>
