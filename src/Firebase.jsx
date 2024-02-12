@@ -9,7 +9,6 @@ import { updateDoc } from "firebase/firestore";
 import {doc, getFirestore, setDoc, getDoc, addDoc, collection, getDocs, query, where, deleteDoc} from "firebase/firestore";
 
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyCIP9ktaH5ougYWCJh-nu6SLsUqTxqB4Rk",
   authDomain: "auth-ef5a1.firebaseapp.com",
@@ -53,6 +52,27 @@ const getAllAdmitCard = async () => {
 const deleteAdmitCard = async (aid) => {
   const admitRef = doc(db, "AdmitCard", aid);
   await deleteDoc(admitRef);
+};
+
+
+
+const getAdmitCardByAppNum = async (appNum) => {
+  const q = query(
+    collection(db, "AdmitCard"),
+    where("appNo", "==", appNum)
+  );
+
+  const querySnapshot = await getDocs(q);
+  console.log(querySnapshot)
+
+  if (querySnapshot.empty) {
+    return null; // Admit Card not found
+  }
+
+  // Assuming there's only one Admit Card per Application Number
+  const admitCard = querySnapshot.docs[0].data();
+  console.log(admitCard)
+  return admitCard;
 };
 
 //-----------NOTES --------------
@@ -141,7 +161,8 @@ export {
   getDemoNoteById,
   addAdmitCard,
   getAllAdmitCard,
-  deleteAdmitCard
+  deleteAdmitCard,
+  getAdmitCardByAppNum
 };
 
 
