@@ -157,8 +157,6 @@ const Header = () => {
                 </ul>
               </details>
             </li>
-
-           
           </ul>
           <div className="dropdown dropdown-end hidden">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -190,6 +188,9 @@ const Header = () => {
               </li>
               <li>
                 <Link to="/pdf-list">Download Pdf Notes</Link>
+              </li>
+              <li>
+                <Link to="/download-admit-card">Admit Card</Link>
               </li>
               <li>
                 <Link to="/tutorials">Tutorials</Link>
