@@ -16,8 +16,7 @@ const Footer = () => {
           </p>
           <p>
             <i class="fa-solid fa-location-dot "></i> Address- Near- SBI Bank
-            Shanichara Road, Kohinoor Complex, <br /> &nbsp;&nbsp;&nbsp;
-            Dhanghata Sant Kabir Nagar 272162
+            Piyush Complex ( Khalilabad Road) <br/> &nbsp; &nbsp;&nbsp; Dhanghata Sant Kabir Nagar 272162 U.P.
           </p>
           <p>
             <i class="fa-solid fa-map-location-dot "></i>{" "}
