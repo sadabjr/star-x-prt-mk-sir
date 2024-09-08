@@ -15,7 +15,7 @@ const Footer = () => {
             Technical Institute
           </p>
           <p>
-            <i class="fa-solid fa-location-dot "></i> Address- Near- SBI Bank
+            <i class="fa-solid fa-location-dot "></i> Address-
             Piyush Complex ( Khalilabad Road) <br/> &nbsp; &nbsp;&nbsp; Dhanghata Sant Kabir Nagar 272162 U.P.
           </p>
           <p>
